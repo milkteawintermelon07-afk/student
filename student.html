@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Profile Cards</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #654b78;
+            min-height: 100vh;
+            padding: 30px 18px;
+            background:
+                radial-gradient(circle at 10% 10%, #ffe0ef, transparent 35%),
+                radial-gradient(circle at 90% 85%, #e5d9ff, transparent 35%),
+                linear-gradient(135deg, #fff6fb, #f4edff, #fff0f7);
+        }
+
+        .container {
+            max-width: 950px;
+            margin: auto;
+        }
+
+        .heading {
+            text-align: center;
+            margin: 20px 0 35px;
+        }
+
+        h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: clamp(32px, 7vw, 53px);
+            line-height: 1.2;
+            color: #aa7bd1;
+            text-shadow: 2px 3px 0 #ffffff;
+        }
+
+        .underline {
+            width: 100px;
+            height: 5px;
+            margin: 17px auto 0;
+            border-radius: 20px;
+            background: linear-gradient(90deg, #f5aecd, #c6a6f4);
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 23px;
+        }
+
+        .card {
+            --main: #a17bc9;
+            --soft: #f3eaff;
+            --border: #dfc9f5;
+
+            position: relative;
+            overflow: hidden;
+            padding: 24px;
+            border: 1.5px solid var(--border);
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 24px rgba(157, 112, 184, 0.12);
+            transition: transform 0.25s ease,
+                        box-shadow 0.25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 30px rgba(157, 112, 184, 0.19);
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            width: 125px;
+            height: 125px;
+            right: -55px;
+            top: -58px;
+            border-radius: 50%;
+            background: var(--soft);
+        }
+
+        .card::after {
+            content: "✦";
+            position: absolute;
+            top: 18px;
+            right: 20px;
+            color: var(--border);
+            font-size: 20px;
+        }
+
+        .card-header {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 22px;
+            padding-right: 10px;
+        }
+
+        .number {
+            flex-shrink: 0;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 19px;
+            background: linear-gradient(140deg, var(--main), var(--border));
+            color: white;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 22px;
+            box-shadow: 0 5px 13px rgba(174, 128, 194, 0.2);
+        }
+
+        .name {
+            font-family: 'Fredoka', sans-serif;
+            font-size: clamp(20px, 3vw, 25px);
+            line-height: 1.25;
+            color: var(--main);
+            font-weight: 600;
+            overflow-wrap: anywhere;
+        }
+
+        .info {
+            position: relative;
+            padding: 14px 17px;
+            border-radius: 17px;
+            background: var(--soft);
+        }
+
+        .info p {
+            padding: 8px 0;
+            font-size: 13px;
+            line-height: 1.5;
+            overflow-wrap: anywhere;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .info p:last-child {
+            border-bottom: none;
+        }
+
+        .info strong {
+            display: block;
+            margin-bottom: 3px;
+            color: var(--main);
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.3px;
+        }
+
+        .purple {
+            --main: #9870c8;
+            --soft: #f3eaff;
+            --border: #d8c0f3;
+        }
+
+        .pink {
+            --main: #c36f9d;
+            --soft: #fff0f7;
+            --border: #f1c3dc;
+        }
+
+        .lavender {
+            --main: #8f7bc6;
+            --soft: #f0edff;
+            --border: #d0c8f5;
+        }
+
+        .rose {
+            --main: #bd719f;
+            --soft: #fff0f7;
+            --border: #f2c6df;
+        }
+
+        .lilac {
+            --main: #a077bd;
+            --soft: #f8efff;
+            --border: #e0c8f0;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 35px;
+            padding: 18px;
+            color: #a68ab9;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 15px;
+        }
+
+        .footer span {
+            color: #e6a1c8;
+            margin: 0 5px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 13px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .card {
+                padding: 21px;
+            }
+
+            .name {
+                font-size: 24px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .card {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+
+        <header class="heading">
+            <h1>Student Profile Cards</h1>
+            <div class="underline"></div>
+        </header>
+
+        <section class="cards">
+
+            <article class="card purple">
+                <div class="card-header">
+                    <div class="number">01</div>
+                    <h2 class="name">Rhain Contante</h2>
+                </div>
+                <div class="info">
+                    <p><strong>Name</strong>Rhain Contante</p>
+                    <p><strong>Student ID</strong>250103828</p>
+                    <p><strong>Program</strong>BSIT</p>
+                </div>
+            </article>
+
+            <article class="card pink">
+                <div class="card-header">
+                    <div class="number">02</div>
+                    <h2 class="name">Axl D. Nuñez</h2>
+                </div>
+                <div class="info">
+                    <p><strong>Name</strong>Axl D. Nuñez</p>
+                    <p><strong>Student ID</strong>250103823</p>
+                    <p><strong>Program</strong>BSIT</p>
+                </div>
+            </article>
+
+            <article class="card lavender">
+                <div class="card-header">
+                    <div class="number">03</div>
+                    <h2 class="name">Jasmin Mae Red</h2>
+                </div>
+                <div class="info">
+                    <p><strong>Name</strong>Jasmin Mae Red</p>
+                    <p><strong>Student ID</strong>250101540</p>
+                    <p><strong>Program</strong>BSIT</p>
+                </div>
+            </article>
+
+            <article class="card rose">
+                <div class="card-header">
+                    <div class="number">04</div>
+                    <h2 class="name">Carla Mojeca Elliot</h2>
+                </div>
+                <div class="info">
+                    <p><strong>Name</strong>Carla Mojeca Elliot</p>
+                    <p><strong>Student ID</strong>250101645</p>
+                    <p><strong>Program</strong>BSIT</p>
+                </div>
+            </article>
+
+            <article class="card lilac">
+                <div class="card-header">
+                    <div class="number">05</div>
+                    <h2 class="name">Wayzle Sigue</h2>
+                </div>
+                <div class="info">
+                    <p><strong>Name</strong>Wayzle Sigue</p>
+                    <p><strong>Student ID</strong>250101635</p>
+                    <p><strong>Program</strong>BSIT</p>
+                </div>
+            </article>
+
+        </section>
+
+        <footer class="footer">
+            <span>♡</span> Made with creativity <span>♡</span>
+        </footer>
+
+    </main>
+</body>
+</html>
+
+
